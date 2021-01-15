@@ -91,6 +91,16 @@
 
     <!-- STEP 3 of 3: Syncing progress dialog -->
     <!-- Handled by the asyncTasksModule, see channelEdit/vuex/task/index.js -->
+    <PrimaryDialog v-model="syncingContentModal" :title="$tr('syncingContentTitle')" lazy>
+      <VSubheader>{{ $tr('syncingContentModalExplainer') }}</VSubheader>
+      <VSpacer />
+      <template v-slot:actions>
+        <VSpacer />
+        <VBtn flat @click="handleStopSync">
+          {{ $tr('stopSyncButtonLabel') }}
+        </VBtn>
+      </template>
+    </PrimaryDialog>
   </div>
 
 </template>
@@ -100,6 +110,7 @@
   import { Channel } from 'shared/data/resources';
   import Checkbox from 'shared/views/form/Checkbox';
   import PrimaryDialog from 'shared/views/PrimaryDialog';
+  import { stopSyncing } from 'shared/data/serverSync';
 
   export default {
     name: 'SyncResourcesModal',
@@ -129,6 +140,7 @@
         syncTags: false,
         syncTitlesAndDescriptions: false,
         syncExercises: false,
+        syncingContentModal: false, // informing the user syncing is happening
       };
     },
     computed: {
@@ -165,14 +177,24 @@
         });
       },
       handleSync() {
+        this.confirmSyncModal = false;
+        this.syncingContentModal = true;
         Channel.sync(this.channelId, {
           attributes: this.syncTitlesAndDescriptions,
           tags: this.syncTags,
           files: this.syncFiles,
           assessment_items: this.syncExercises,
         }).then(() => {
-          this.confirmSyncModal = false;
+          // close the modal, adding a little bit of time
+          // so there is not a "flash" effect for quick syncs
+          setTimeout(() => {
+            this.syncingContentModal = false;
+          }, 1000);
         });
+      },
+      handleStopSync() {
+        stopSyncing();
+        this.syncingContentModal = false;
       },
     },
     $trs: {
@@ -197,9 +219,9 @@
       syncButtonLabel: 'Sync',
       //
       // Syncing content (Step 3 of 3) (handled by the asyncTasksModule)
-      // syncingContentTitle: 'Syncing content',
-      // syncingContentModalExplainer: 'Syncing task is in progres, please wait...',
-      // stopSyncButtonLabel: 'stop sync',
+      syncingContentTitle: 'Syncing content',
+      syncingContentModalExplainer: 'Syncing task is in progres, please wait...',
+      stopSyncButtonLabel: 'stop sync',
     },
   };
 
