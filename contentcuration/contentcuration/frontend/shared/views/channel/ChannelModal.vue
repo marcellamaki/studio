@@ -86,9 +86,9 @@
       </VTabsItems>
     </VCardText>
 
-    <MessageDialog
-      v-model="showUnsavedDialog"
-      :header="$tr('unsavedChangesHeader')"
+    <KModal
+      v-if="showUnsavedDialog"
+      :title="$tr('unsavedChangesHeader')"
       :text="$tr('unsavedChangesText')"
     >
       <template #buttons="{ close }">
@@ -99,7 +99,7 @@
           {{ $tr('keepEditingButton') }}
         </VBtn>
       </template>
-    </MessageDialog>
+    </KModal>
   </FullscreenModal>
 
 </template>

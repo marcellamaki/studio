@@ -35,9 +35,9 @@
           </VListTile>
         </VList>
       </Menu>
-      <MessageDialog
-        v-model="deleteDialog"
-        :header="$tr('deleteChannelSetTitle')"
+      <KModal
+        v-if="deleteDialog"
+        :title="$tr('deleteChannelSetTitle')"
         :text="$tr('deleteChannelSetText')"
       >
         <template #buttons="{ close }">
@@ -53,7 +53,7 @@
             {{ $tr('deleteChannelSetTitle') }}
           </VBtn>
         </template>
-      </MessageDialog>
+      </KModal>
     </td>
   </tr>
 

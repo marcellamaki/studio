@@ -1,8 +1,8 @@
 <template>
 
-  <MessageDialog
-    v-model="dialog"
-    :header="header"
+  <KModal
+    v-if="dialog"
+    :title="header"
     :text="text"
   >
     <VForm ref="form" lazy-validation @submit.prevent="confirm">
@@ -26,7 +26,7 @@
         {{ confirmText }}
       </VBtn>
     </template>
-  </MessageDialog>
+  </KModal>
 
 </template>
 

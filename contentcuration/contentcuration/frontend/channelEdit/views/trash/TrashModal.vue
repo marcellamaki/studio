@@ -98,9 +98,9 @@
         {{ $tr('deleteButton') }}
       </VBtn>
     </template>
-    <MessageDialog
-      v-model="showConfirmationDialog"
-      :header="$tr('deleteConfirmationHeader', counts)"
+    <KModal
+      v-if="showConfirmationDialog"
+      :title="$tr('deleteConfirmationHeader', counts)"
       :text="$tr('deleteConfirmationText')"
     >
       <template #buttons="{ close }">
@@ -111,7 +111,7 @@
           {{ $tr('deleteConfirmationDeleteButton') }}
         </VBtn>
       </template>
-    </MessageDialog>
+    </KModal>
     <MoveModal
       v-if="moveModalOpen"
       ref="moveModal"

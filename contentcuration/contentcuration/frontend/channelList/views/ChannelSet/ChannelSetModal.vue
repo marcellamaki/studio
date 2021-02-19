@@ -105,9 +105,9 @@
         </VContainer>
       </VWindowItem>
     </VWindow>
-    <MessageDialog
-      v-model="showUnsavedDialog"
-      :header="$tr('unsavedChangesHeader')"
+    <KModal
+      v-if="showUnsavedDialog"
+      :title="$tr('unsavedChangesHeader')"
       :text="$tr('unsavedChangesText')"
       data-test="dialog-unsaved"
       :data-test-visible="showUnsavedDialog"
@@ -121,7 +121,7 @@
           {{ $tr('saveButton') }}
         </VBtn>
       </template>
-    </MessageDialog>
+    </KModal>
     <template #bottom>
       <div class="mx-4 subheading">
         {{ $tr('channelSelectedCountText', { 'channelCount': channels.length }) }}

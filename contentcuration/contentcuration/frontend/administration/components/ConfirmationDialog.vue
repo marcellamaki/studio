@@ -1,8 +1,8 @@
 <template>
 
-  <MessageDialog
-    v-model="show"
-    :header="title"
+  <KModal
+    v-if="show"
+    :title="title"
     :text="text"
   >
     <template #buttons="{ close }">
@@ -13,7 +13,7 @@
         {{ confirmButtonText }}
       </VBtn>
     </template>
-  </MessageDialog>
+  </KModal>
 
 </template>
 

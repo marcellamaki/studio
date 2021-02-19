@@ -186,7 +186,7 @@
           {{ $tr('deleteChannelButton') }}
         </VBtn>
       </template>
-    </MessageDialog>
+    </KModal>
     <VSpeedDial
       v-if="showClipboardSpeedDial"
       v-model="showClipboard"

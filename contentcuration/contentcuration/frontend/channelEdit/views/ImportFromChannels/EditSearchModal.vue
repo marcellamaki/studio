@@ -1,6 +1,6 @@
 <template>
 
-  <MessageDialog v-model="dialog" :header="$tr('editSavedSearchTitle')">
+  <KModal v-if="dialog" :title="$tr('editSavedSearchTitle')">
     <VForm ref="form" lazy-validation @submit.prevent="handleSubmit">
       <VTextField
         v-model="searchTerm"
@@ -20,7 +20,7 @@
         {{ $tr('saveChangesAction') }}
       </VBtn>
     </template>
-  </MessageDialog>
+  </KModal>
 
 </template>
 

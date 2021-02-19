@@ -43,9 +43,9 @@
         </VListTileAction>
       </template>
     </VListTile>
-    <MessageDialog
-      v-model="dialog"
-      :header="$tr('decliningInvitation')"
+    <KModal
+      v-if="dialog"
+      :title="$tr('decliningInvitation')"
       :text="$tr('decliningInvitationMessage')"
     >
       <template #buttons="{ close }">
@@ -57,7 +57,7 @@
           {{ $tr('decline') }}
         </VBtn>
       </template>
-    </MessageDialog>
+    </KModal>
   </div>
 
 </template>

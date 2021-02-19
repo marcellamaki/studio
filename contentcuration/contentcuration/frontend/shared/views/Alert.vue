@@ -1,6 +1,6 @@
 <template>
 
-  <MessageDialog v-model="open" :header="header" :text="text">
+  <KModal v-if="open" :title="header" :text="text">
     <slot></slot>
     <VCheckbox
       v-if="messageId"
@@ -14,7 +14,7 @@
         {{ $tr('closeButtonLabel') }}
       </VBtn>
     </template>
-  </MessageDialog>
+  </KModal>
 
 </template>
 

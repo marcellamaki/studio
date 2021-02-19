@@ -8,7 +8,7 @@
           class="mx-2"
           @click="infoDialog = true"
         />
-        <MessageDialog v-model="infoDialog" :header="$tr('aboutChannelSets')">
+        <KModal v-if="infoDialog" :title="$tr('aboutChannelSets')">
           <p>
             {{ $tr('channelSetsDescriptionText') }}
           </p>
@@ -24,7 +24,7 @@
               {{ $tr('cancelButtonLabel') }}
             </VBtn>
           </template>
-        </MessageDialog>
+        </KModal>
       </VFlex>
       <VSpacer />
       <VFlex class="text-xs-right">

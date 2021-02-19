@@ -1,6 +1,6 @@
 <template>
 
-  <MessageDialog v-model="dialog" :header="$tr('createTopic')">
+  <KModal v-if="dialog" :title="$tr('createTopic')">
     <VForm
       ref="form"
       lazy-validation
@@ -28,7 +28,7 @@
         {{ $tr("create") }}
       </VBtn>
     </template>
-  </MessageDialog>
+  </KModal>
 
 </template>
 

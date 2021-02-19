@@ -56,9 +56,9 @@
       </VList>
     </KModal>
 
-    <MessageDialog
-      v-model="showDelete"
-      :header="$tr('deleteSearchTitle')"
+    <KModal
+      v-if="showDelete"
+      :title="$tr('deleteSearchTitle')"
       :text="$tr('deleteConfirmation')"
     >
       <template #buttons>
@@ -69,7 +69,7 @@
           {{ $tr('deleteAction') }}
         </VBtn>
       </template>
-    </MessageDialog>
+    </KModal>
 
     <EditSearchModal
       v-if="searchId"

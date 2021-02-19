@@ -23,9 +23,9 @@
       @deleteItem="onDeleteAssessmentItem"
     />
 
-    <MessageDialog
-      v-model="dialog.open"
-      :header="dialog.title"
+    <KModal
+      v-if="dialog.open"
+      :title="dialog.title"
       :text="dialog.message"
     >
       <template #buttons>
@@ -43,7 +43,7 @@
           {{ dialog.submitLabel || $tr('dialogSubmitBtnLabel') }}
         </VBtn>
       </template>
-    </MessageDialog>
+    </KModal>
   </div>
 
 </template>

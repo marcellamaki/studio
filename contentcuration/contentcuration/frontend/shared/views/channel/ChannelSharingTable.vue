@@ -71,9 +71,9 @@
     </VDataTable>
 
     <!-- Remove viewer confirmation -->
-    <MessageDialog
-      v-model="showRemoveViewer"
-      :header="$tr('removeViewerHeader')"
+    <KModal
+      v-if="showRemoveViewer"
+      :title="$tr('removeViewerHeader')"
       :text="$tr('removeViewerText',
                  { first_name: selected.first_name, last_name: selected.last_name })"
     >
@@ -89,32 +89,37 @@
           {{ $tr('removeViewerConfirm') }}
         </VBtn>
       </template>
-    </MessageDialog>
+    </KModal>
 
     <!-- Delete invitation confirmation -->
-    <MessageDialog
-      v-model="showDeleteInvitation"
-      :header="$tr('deleteInvitationHeader')"
-      :text="$tr('deleteInvitationText', { email: selected.email })"
+    <KModal
+      v-if="showDeleteInvitation"
+      :title="$tr('deleteInvitationHeader')"
     >
-      <template #buttons="{ close }">
-        <VBtn flat @click="close">
-          {{ $tr('cancelButton') }}
-        </VBtn>
-        <VBtn
-          color="primary"
-          data-test="confirm-delete"
-          @click="handleDelete(selected.id)"
-        >
-          {{ $tr('deleteInvitationConfirm') }}
-        </VBtn>
-      </template>
-    </MessageDialog>
+      {{ $tr('deleteInvitationText', { email: selected.email }) }}
+      <KButtonGroup style="margin-top: 8px;">
+      <KButton
+        @click="close"
+        :primary="false"
+        appearance="flat-button"
+      >
+        {{ $tr('cancelButton') }}
+      </KButton>
+      <KButton
+        :primary="true"
+        appearance="flat-button"
+        data-test="confirm-delete"
+        @click="handleDelete(selected.id)"
+      >
+        {{ $tr('deleteInvitationConfirm') }}
+      </KButton>
+      </KButtonGroup>
+    </KModal>
 
     <!-- Make editor confirmation -->
-    <MessageDialog
-      v-model="showMakeEditor"
-      :header="$tr('makeEditorHeader')"
+    <KModal
+      v-if="showMakeEditor"
+      :title="$tr('makeEditorHeader')"
       :text="$tr('makeEditorText',
                  { first_name: selected.first_name, last_name: selected.last_name })"
     >
@@ -130,7 +135,7 @@
           {{ $tr('makeEditorConfirm') }}
         </VBtn>
       </template>
-    </MessageDialog>
+    </KModal>
 
   </div>
 
