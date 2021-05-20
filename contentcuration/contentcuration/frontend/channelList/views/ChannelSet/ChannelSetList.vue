@@ -8,7 +8,12 @@
           class="mx-2"
           @click="infoDialog = true"
         />
-        <KModal v-if="infoDialog" :title="$tr('aboutChannelSets')">
+        <KModal
+          v-if="infoDialog"
+          :title="$tr('aboutChannelSets')"
+          @cancel="infoDialog = false"
+          :cancelText="$tr('cancelButtonLabel')"
+        >
           <p>
             {{ $tr('channelSetsDescriptionText') }}
           </p>
@@ -18,12 +23,6 @@
           <p class="red--text">
             {{ $tr('channelSetsDisclaimer') }}
           </p>
-          <template #buttons>
-            <VSpacer />
-            <VBtn @click="infoDialog = false">
-              {{ $tr('cancelButtonLabel') }}
-            </VBtn>
-          </template>
         </KModal>
       </VFlex>
       <VSpacer />

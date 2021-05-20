@@ -74,69 +74,41 @@
     <KModal
       v-if="showRemoveViewer"
       :title="$tr('removeViewerHeader')"
-      :text="$tr('removeViewerText',
-                 { first_name: selected.first_name, last_name: selected.last_name })"
+      @submit="handleRemoveViewer(selected)"
+      :submitText="$tr('removeViewerConfirm')"
+      @cancel="showRemoveViewer = false"
+      :cancelText="$tr('cancelButton')"
     >
-      <template #buttons="{ close }">
-        <VBtn flat @click="close">
-          {{ $tr('cancelButton') }}
-        </VBtn>
-        <VBtn
-          color="primary"
-          data-test="confirm-remove"
-          @click="handleRemoveViewer(selected)"
-        >
-          {{ $tr('removeViewerConfirm') }}
-        </VBtn>
-      </template>
+      {{ $tr('removeViewerText',
+        { first_name: selected.first_name, last_name: selected.last_name })
+      }}
     </KModal>
 
     <!-- Delete invitation confirmation -->
     <KModal
       v-if="showDeleteInvitation"
       :title="$tr('deleteInvitationHeader')"
+      @submit="handleDelete(selected.id)"
+      :submitText="$tr('deleteInvitationConfirm')"
+      @cancel="showDeleteInvitation = false"
+      :cancelText="$tr('cancelButton')"
     >
       {{ $tr('deleteInvitationText', { email: selected.email }) }}
-      <KButtonGroup style="margin-top: 8px;">
-      <KButton
-        @click="close"
-        :primary="false"
-        appearance="flat-button"
-      >
-        {{ $tr('cancelButton') }}
-      </KButton>
-      <KButton
-        :primary="true"
-        appearance="flat-button"
-        data-test="confirm-delete"
-        @click="handleDelete(selected.id)"
-      >
-        {{ $tr('deleteInvitationConfirm') }}
-      </KButton>
-      </KButtonGroup>
     </KModal>
 
     <!-- Make editor confirmation -->
     <KModal
       v-if="showMakeEditor"
       :title="$tr('makeEditorHeader')"
-      :text="$tr('makeEditorText',
-                 { first_name: selected.first_name, last_name: selected.last_name })"
+      @submit="grantEditAccess(selected.id)"
+      :submitText="$tr('makeEditorConfirm')"
+      @cancel="showMakeEditor = false"
+      :cancelText="$tr('cancelButton')"
     >
-      <template #buttons="{ close }">
-        <VBtn flat @click="close">
-          {{ $tr('cancelButton') }}
-        </VBtn>
-        <VBtn
-          color="primary"
-          data-test="confirm-makeeditor"
-          @click="grantEditAccess(selected.id)"
-        >
-          {{ $tr('makeEditorConfirm') }}
-        </VBtn>
-      </template>
+      {{ $tr('makeEditorText',
+        { first_name: selected.first_name, last_name: selected.last_name })
+      }}
     </KModal>
-
   </div>
 
 </template>

@@ -46,17 +46,12 @@
     <KModal
       v-if="dialog"
       :title="$tr('decliningInvitation')"
-      :text="$tr('decliningInvitationMessage')"
+      @submit="declineAndClose"
+      :submitText="$tr('decline')"
+      @cancel="dialog = false"
+      :cancelText="$tr('cancel')"
     >
-      <template #buttons="{ close }">
-        <VSpacer />
-        <VBtn flat @click="close">
-          {{ $tr('cancel') }}
-        </VBtn>
-        <VBtn data-test="decline-close" color="primary" @click="declineAndClose">
-          {{ $tr('decline') }}
-        </VBtn>
-      </template>
+      {{ $tr('decliningInvitationMessage')}}
     </KModal>
   </div>
 

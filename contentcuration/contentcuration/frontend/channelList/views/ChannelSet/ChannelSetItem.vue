@@ -35,28 +35,18 @@
           </VListTile>
         </VList>
       </Menu>
-      <KModal
-        v-if="deleteDialog"
-        :title="$tr('deleteChannelSetTitle')"
-        :text="$tr('deleteChannelSetText')"
-      >
-        <template #buttons="{ close }">
-          <VSpacer />
-          <VBtn flat color="primary" @click="close">
-            {{ $tr('cancel') }}
-          </VBtn>
-          <VBtn
-            color="primary"
-            data-test="delete"
-            @click="deleteChannelSet(channelSet); close()"
-          >
-            {{ $tr('deleteChannelSetTitle') }}
-          </VBtn>
-        </template>
-      </KModal>
     </td>
+    <KModal
+      v-if="deleteDialog"
+      :title="$tr('deleteChannelSetTitle')"
+      @submit="deleteChannelSet(channelSet)"
+      :submitText="$tr('deleteChannelSetTitle')"
+      @cancel="deleteDialog = false"
+      :cancelText="$tr('cancel')"
+    >
+      {{ $tr('deleteChannelSetText') }}
+    </KModal>
   </tr>
-
 </template>
 
 <script>

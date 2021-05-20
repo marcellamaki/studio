@@ -18,6 +18,9 @@
         @input="resetValidation"
       />
     </VForm>
+    <p>
+      {{ text }}
+    </p>
     <template #buttons>
       <VBtn flat data-test="cancel" @click="close">
         Cancel

@@ -1,8 +1,16 @@
 <template>
 
-  <KModal v-if="dialog" :title="$tr('editSavedSearchTitle')">
-    <VForm ref="form" lazy-validation @submit.prevent="handleSubmit">
-      <VTextField
+
+  <KModal
+      v-if="dialog"
+      :title="$tr('editSavedSearchTitle')"
+      @submit="handleSubmit"
+      :submitText="$tr('saveChangesAction')"
+      @cancel="dialog = false"
+      :cancelText="$tr('cancelAction')"
+    >
+      <VForm ref="form" lazy-validation @submit.prevent="handleSubmit">
+      <KTextbox
         v-model="searchTerm"
         box
         autofocus
@@ -12,15 +20,8 @@
         :label="$tr('searchTitleLabel')"
       />
     </VForm>
-    <template #buttons="{ close }">
-      <VBtn flat @click="close">
-        {{ $tr('cancelAction') }}
-      </VBtn>
-      <VBtn color="primary" @click="handleSubmit">
-        {{ $tr('saveChangesAction') }}
-      </VBtn>
-    </template>
-  </KModal>
+    </KModal>
+
 
 </template>
 

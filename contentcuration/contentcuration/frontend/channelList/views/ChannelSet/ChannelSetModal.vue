@@ -105,22 +105,16 @@
         </VContainer>
       </VWindowItem>
     </VWindow>
+
     <KModal
       v-if="showUnsavedDialog"
       :title="$tr('unsavedChangesHeader')"
-      :text="$tr('unsavedChangesText')"
-      data-test="dialog-unsaved"
-      :data-test-visible="showUnsavedDialog"
+      @submit="save"
+      :submitText="$tr('saveButton')"
+      @cancel="confirmCancel"
+      :cancelText="$tr('closeButton')"
     >
-      <template #buttons>
-        <VSpacer />
-        <VBtn flat @click="confirmCancel">
-          {{ $tr('closeButton') }}
-        </VBtn>
-        <VBtn color="primary" @click="save">
-          {{ $tr('saveButton') }}
-        </VBtn>
-      </template>
+      {{ $tr('unsavedChangesText') }}
     </KModal>
     <template #bottom>
       <div class="mx-4 subheading">

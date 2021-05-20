@@ -125,52 +125,40 @@
     </VDialog>
 
     <!-- Dialog for catching unsaved changes -->
-    <MessageDialog
-      v-model="promptInvalid"
-      :header="$tr('invalidNodesFound', { count: invalidNodes.length })"
-      :text="$tr('invalidNodesFoundText')"
+    <KModal
+      v-if="promptInvalid"
+      :title="$tr('invalidNodesFound', { count: invalidNodes.length })"
+      @submit="closeModal"
+      :submitText="$tr('saveAnywaysButton')"
+      @cancel="promptInvalid = false"
+      :cancelText="$tr('keepEditingButton')"
     >
-      <template #buttons="{ close }">
-        <VBtn flat data-test="saveanyways" color="primary" @click="closeModal">
-          {{ $tr('saveAnywaysButton') }}
-        </VBtn>
-        <VBtn color="primary" @click="close">
-          {{ $tr('keepEditingButton') }}
-        </VBtn>
-      </template>
-    </MessageDialog>
+      {{ $tr('invalidNodesFoundText') }}
+    </KModal>
 
     <!-- Dialog for catching in-progress file uploads -->
-    <MessageDialog
-      v-model="promptUploading"
-      :header="$tr('uploadInProgressHeader')"
-      :text="$tr('uploadInProgressText')"
+    <KModal
+      v-if="promptUploading"
+      :title="$tr('uploadInProgressHeader')"
+      @submit="closeModal"
+      :submitText="$tr('cancelUploadsButton')"
+      @cancel="promptUploading = false"
+      :cancelText="$tr('dismissDialogButton')"
     >
-      <template #buttons="{ close }">
-        <VBtn flat @click="close">
-          {{ $tr('dismissDialogButton') }}
-        </VBtn>
-        <VBtn data-test="canceluploads" color="primary" @click="closeModal">
-          {{ $tr('cancelUploadsButton') }}
-        </VBtn>
-      </template>
-    </MessageDialog>
+      {{ $tr('uploadInProgressText') }}
+    </KModal>
 
     <!-- Alert for failed save -->
-    <MessageDialog
-      v-model="promptFailed"
-      :header="$tr('saveFailedHeader')"
-      :text="$tr('saveFailedText')"
+    <KModal
+      v-if="promptFailed"
+      :title="$tr('saveFailedHeader')"
+      @submit="closeModal"
+      :submitText="$tr('closeWithoutSavingButton')"
+      @cancel="promptFailed = false"
+      :cancelText="$tr('okButton')"
     >
-      <template #buttons="{ close }">
-        <VBtn flat @click="close">
-          {{ $tr('okButton') }}
-        </VBtn>
-        <VBtn color="primary" @click="closeModal">
-          {{ $tr('closeWithoutSavingButton') }}
-        </VBtn>
-      </template>
-    </MessageDialog>
+      {{ $tr('saveFailedText') }}
+    </KModal>
   </div>
 
 </template>

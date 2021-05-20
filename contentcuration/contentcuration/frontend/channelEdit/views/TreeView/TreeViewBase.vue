@@ -175,17 +175,16 @@
       @syncing="syncInProgress"
       @nosync="noResourcesToSync"
     />
-    <MessageDialog v-model="showDeleteModal" :header="$tr('deleteTitle')">
+
+    <KModal
+      v-if="showDeleteModal"
+      :title="$tr('deleteTitle')"
+      @submit="handleDelete"
+      :submitText="$tr('deleteChannelButton')"
+      @cancel="showDeleteModal = false"
+      :cancelText="$tr('cancel')"
+    >
       {{ $tr('deletePrompt') }}
-      <template #buttons="{ close }">
-        <VSpacer />
-        <VBtn color="primary" flat @click="close">
-          {{ $tr('cancel') }}
-        </VBtn>
-        <VBtn color="primary" data-test="delete" @click="handleDelete">
-          {{ $tr('deleteChannelButton') }}
-        </VBtn>
-      </template>
     </KModal>
     <VSpeedDial
       v-if="showClipboardSpeedDial"
